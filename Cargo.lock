@@ -388,7 +388,6 @@ name = "bevy_fps"
 version = "0.1.0"
 dependencies = [
  "bevy",
- "kurinji",
 ]
 
 [[package]]
@@ -436,7 +435,6 @@ dependencies = [
  "bevy_ecs",
  "bevy_math",
  "bevy_utils",
- "serde",
 ]
 
 [[package]]
@@ -2051,18 +2049,6 @@ checksum = "7507624b29483431c0ba2d82aece8ca6cdba9382bff4ddd0f7490560c056098d"
 dependencies = [
  "winapi 0.2.8",
  "winapi-build",
-]
-
-[[package]]
-name = "kurinji"
-version = "1.0.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e492a5e8329d1bae50c2c4b8035748d1ffe3b0fbab2d2217bbf9044ad0293a5c"
-dependencies = [
- "bevy",
- "ron",
- "serde",
- "serde_json",
 ]
 
 [[package]]
