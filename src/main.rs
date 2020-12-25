@@ -3,6 +3,7 @@ use bevy::window::WindowMode;
 
 mod input;
 use input::input_adapter::*;
+use input::test_input_events::*;
 
 fn main() {
     App::build()
@@ -16,5 +17,6 @@ fn main() {
         })
         .add_plugins(DefaultPlugins)
         .add_plugin(InputAdapter)
+        .add_plugin(TestInputEvents)
         .run();
 }
