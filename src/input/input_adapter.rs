@@ -51,12 +51,10 @@ fn update_simple_actions(
     }
 
     if keyboard_input.just_pressed(KeyCode::E) {
-        info!("Interacting");
         interact_events.send(InteractInputEvent{});
     }
 
     if mouse_button_input.just_pressed(MouseButton::Left) {
-        info!("Shooting");
         shoot_events.send(ShootInputEvent{});
     }
 }
@@ -68,28 +66,23 @@ fn update_walking(
     let mut direction = Vec2::zero();
 
     if keyboard_input.pressed(KeyCode::W) {
-        info!("Walking forward");
         direction.y += 1.0;
     }
 
     if keyboard_input.pressed(KeyCode::S) {
-        info!("Walking backwards");
         direction.y -= 1.0;
     }
 
     if keyboard_input.pressed(KeyCode::D) {
-        info!("Walking to the right");
         direction.x += 1.0;
     }
 
     if keyboard_input.pressed(KeyCode::A) {
-        info!("Walking to the left");
         direction.x -= 1.0;
     }
 
     if direction.length() != 0.0 {
         direction = direction.normalize();
-        info!("Walking in direction: {}", direction.to_string());
         walk_events.send(WalkInputEvent{direction: direction});
     }
 }
@@ -106,7 +99,6 @@ fn update_looking(
 
     if direction.length() != 0.0 {
         direction = direction.normalize();
-        info!("Looking in direction: {}", direction.to_string());
         look_events.send(LookInputEvent{direction: direction});
     }
 }
