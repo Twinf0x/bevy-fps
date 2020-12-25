@@ -2,20 +2,7 @@ use bevy::prelude::*;
 use bevy::input::{keyboard::KeyCode, Input};
 use bevy::input::mouse::MouseMotion;
 use bevy::app::Events;
-
-// Input Events
-// Compound events
-struct WalkInputEvent {
-    direction: Vec2
-}
-struct LookInputEvent {
-    direction: Vec2
-}
-
-// Simple action events
-struct ReloadInputEvent {}
-struct InteractInputEvent {}
-struct ShootInputEvent {}
+use crate::input::input_events::*;
 
 #[derive(Default)]
 struct InputState {
