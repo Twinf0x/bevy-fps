@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::prelude::Vec2;
 
 // How to use the input events
 
