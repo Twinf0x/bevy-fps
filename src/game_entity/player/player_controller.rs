@@ -2,14 +2,17 @@ use bevy::prelude::*;
 use bevy::app::Events;
 use bevy::math::*;
 use crate::input::input_events::*;
-use crate::player::player_components::*;
+use crate::game_entity::player::player_components::*;
+use crate::game_entity::behaviour_components::*;
+
+const DEG2RAD: f32 = std::f32::consts::PI / 180.0;
 
 pub struct PlayerController;
 impl Plugin for PlayerController {
     fn build(&self, app: &mut AppBuilder){
         app.add_startup_system(setup_player_character.system())
             .add_system(update_walking.system())
-            .add_system(update_rotation.system());
+            .add_system(update_first_person_camera.system());
     }
 }
 
@@ -68,9 +71,7 @@ fn update_walking(
     }
 }
 
-const DEG2RAD: f32 = std::f32::consts::PI / 180.0;
-
-fn update_rotation(
+fn update_first_person_camera(
     mut look_reader: Local<EventReader<LookInputEvent>>,
     look_events: Res<Events<LookInputEvent>>,
     mut player_cameras: Query<(&mut Transform, &mut PlayerCamera)>,

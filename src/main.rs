@@ -4,8 +4,8 @@ use bevy::window::WindowMode;
 mod input;
 use input::input_adapter::*;
 
-mod player;
-use player::character_controller::*;
+mod game_entity;
+use game_entity::player::player_controller::*;
 
 fn main() {
     App::build()
