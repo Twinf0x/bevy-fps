@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 use bevy::app::Events;
+use bevy::math::*;
 use crate::input::input_events::*;
 use crate::player::player_components::*;
 
@@ -42,7 +43,11 @@ fn setup_player_character(
         },
         ..Default::default()
     })
-    .with(PlayerCamera{})
+    .with(PlayerCamera{
+        max_pitch: 60.0,
+        min_pitch: -60.0,
+        current_pitch: 0.0
+    })
     .with(Parent(player));
 }
 
@@ -68,7 +73,7 @@ const DEG2RAD: f32 = std::f32::consts::PI / 180.0;
 fn update_rotation(
     mut look_reader: Local<EventReader<LookInputEvent>>,
     look_events: Res<Events<LookInputEvent>>,
-    mut player_cameras: Query<&mut Transform, With<PlayerCamera>>,
+    mut player_cameras: Query<(&mut Transform, &mut PlayerCamera)>,
     mut players: Query<&mut Transform, With<Player>>
 ) {
     for look_event in look_reader.iter(&look_events){
@@ -83,14 +88,16 @@ fn update_rotation(
             transform.rotation = transform.rotation * yaw_delta;
         }
 
-        for mut transform in player_cameras.iter_mut() {
-            let pitch_delta = Quat::from_rotation_ypr(
+        for (mut transform, mut player_camera) in player_cameras.iter_mut() {
+            player_camera.current_pitch = player_camera.current_pitch + look_event.direction.y;
+            player_camera.current_pitch = clamp(player_camera.current_pitch, player_camera.min_pitch, player_camera.max_pitch);
+            let pitch = Quat::from_rotation_ypr(
                 0.0,
-                look_event.direction.y * DEG2RAD * -1.0,
+                player_camera.current_pitch * DEG2RAD * -1.0,
                 0.0
             );
 
-            transform.rotation = transform.rotation * pitch_delta;
+            transform.rotation = pitch;
         }
     }
 }

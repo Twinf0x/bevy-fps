@@ -10,10 +10,10 @@ pub struct PlayerBundle {
 }
 
 pub struct Player;
-pub struct PlayerCamera;
-
-pub struct PlayerInputSettings {
-    pub mouse_sensitivity: f32
+pub struct PlayerCamera {
+    pub max_pitch: f32,
+    pub min_pitch: f32,
+    pub current_pitch: f32
 }
 
 // These are probably relevant for enemies, too.
