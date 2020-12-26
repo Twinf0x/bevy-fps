@@ -1,13 +1,16 @@
-use bevy::prelude::{Bundle, Transform};
+use bevy::prelude::{Bundle, Transform, GlobalTransform};
 
 #[derive(Bundle)]
 pub struct PlayerBundle {
     pub player: Player,
+    pub transform: Transform,
     pub mover: Mover,
     pub destructable: Destructable,
+    pub global_transform: GlobalTransform
 }
 
 pub struct Player;
+pub struct PlayerCamera;
 
 pub struct PlayerInputSettings {
     pub mouse_sensitivity: f32
