@@ -12,7 +12,8 @@ impl Plugin for PlayerController {
     fn build(&self, app: &mut AppBuilder){
         app.add_startup_system(setup_player_character.system())
             .add_system(update_walking.system())
-            .add_system(update_first_person_camera.system());
+            .add_system(update_first_person_camera.system())
+            .add_system(update_player_death.system());
     }
 }
 
@@ -99,6 +100,16 @@ fn update_first_person_camera(
             );
 
             transform.rotation = pitch;
+        }
+    }
+}
+
+fn update_player_death(
+    players: Query<&Destructable, With<Player>>
+) {
+    for player in players.iter() {
+        if player.current_health <= 0.0 {
+            info!("You died! To do: restart or something");
         }
     }
 }
