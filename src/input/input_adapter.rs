@@ -98,7 +98,6 @@ fn update_looking(
     }
 
     if direction.length() != 0.0 {
-        direction = direction.normalize();
         look_events.send(LookInputEvent{direction: direction});
     }
 }
