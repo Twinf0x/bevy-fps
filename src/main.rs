@@ -5,6 +5,9 @@ mod input;
 use input::input_adapter::*;
 use input::test_input_events::*;
 
+mod ui;
+use ui::hud::*;
+
 fn main() {
     App::build()
         .add_resource(Msaa {samples: 4})
@@ -18,5 +21,6 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugin(InputAdapter)
         .add_plugin(TestInputEvents)
+        .add_plugin(Hud)
         .run();
 }
