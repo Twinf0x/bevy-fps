@@ -11,6 +11,9 @@ mod graphics;
 use graphics::sprite_animator::*;
 use graphics::test_sprite_animation::*;
 
+mod ui;
+use ui::hud::*;
+
 fn main() {
     App::build()
         .add_resource(Msaa {samples: 4})
@@ -27,6 +30,7 @@ fn main() {
         .add_plugin(PlayerController)
         .add_plugin(SpriteAnimationPlugin)
         .add_plugin(TestSpriteAnimator)
+        .add_plugin(Hud)
         .add_startup_system(setup.system())
         .run();
 }
