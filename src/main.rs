@@ -7,6 +7,10 @@ use input::input_adapter::*;
 mod game_entity;
 use game_entity::player::player_controller::*;
 
+mod graphics;
+use graphics::sprite_animator::*;
+use graphics::test_sprite_animation::*;
+
 fn main() {
     App::build()
         .add_resource(Msaa {samples: 4})
@@ -21,6 +25,8 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugin(InputAdapter)
         .add_plugin(PlayerController)
+        .add_plugin(SpriteAnimationPlugin)
+        .add_plugin(TestSpriteAnimator)
         .add_startup_system(setup.system())
         .run();
 }
