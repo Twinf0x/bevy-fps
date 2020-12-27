@@ -37,3 +37,5 @@ pub struct Animation {
     pub frames: Vec<Handle<Texture>>,
     pub current_frame: usize,
 }
+
+pub struct BillboardSprite;
