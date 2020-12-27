@@ -2,28 +2,36 @@ use bevy::{
     diagnostic::{Diagnostics, FrameTimeDiagnosticsPlugin},
     prelude::*,
 };
+use crate::game_entity::player::player_components::*;
 
 pub struct Hud;
 impl Plugin for Hud {
     fn build(&self, app: &mut AppBuilder) {
-        
         app
             .add_plugin(FrameTimeDiagnosticsPlugin::default())
             .add_startup_system(setup.system())
-            .add_system(text_update_system.system());
+            .add_system(health_update_system.system())
+            .add_system(ammo_update_system.system());
     }
 }
 
-// A unit struct to help identify the FPS UI component, since there may be many Text components
-struct FpsText;
+struct HealthCount;
+struct AmmoCount;
 
-fn text_update_system(diagnostics: Res<Diagnostics>, mut query: Query<&mut Text, With<FpsText>>) {
+// TODO: get player health
+fn health_update_system(mut query: Query<&mut Text, With<HealthCount>>) {
     for mut text in query.iter_mut() {
-        if let Some(fps) = diagnostics.get(FrameTimeDiagnosticsPlugin::FPS) {
-            if let Some(average) = fps.average() {
-                text.value = format!("FPS: {:.2}", average);
-                println!("{:?}", text.value);
-            }
+        if let health = 100 {
+            text.value = format!("Health: {:.0}", health);
+        }
+    }
+}
+
+// TODO: get player ammo
+fn ammo_update_system(mut query: Query<&mut Text, With<AmmoCount>>) {
+    for mut text in query.iter_mut() {
+        if let ammo = 30 {
+            text.value = format!("III: {:.0}", ammo);
         }
     }
 }
@@ -40,15 +48,38 @@ fn setup(commands: &mut Commands, asset_server: Res<AssetServer>) {
                 ..Default::default()
             },
             text: Text {
-                value: "FPS:".to_string(),
+                value: "HEALTH:".to_string(),
                 font: asset_server.load("fonts/Kenney-Space.ttf"),
                 style: TextStyle {
-                    font_size: 60.0,
-                    color: Color::RED,
+                    font_size: 30.0,
+                    color: Color::WHITE,
                     ..Default::default()
                 },
             },
             ..Default::default()
         })
-        .with(FpsText);
+        .with(HealthCount)
+
+        .spawn(TextBundle {
+            style: Style {
+                position_type: PositionType::Absolute,
+                position: Rect {
+                    bottom: Val::Px(0.),
+                    right: Val::Px(0.),
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            text: Text {
+                value: "AMMO:".to_string(),
+                font: asset_server.load("fonts/Kenney-Space.ttf"),
+                style: TextStyle {
+                    font_size: 20.0,
+                    color: Color::WHITE,
+                    ..Default::default()
+                },
+            },
+            ..Default::default()
+        })
+        .with(AmmoCount);
 }
