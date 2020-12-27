@@ -59,7 +59,7 @@ fn create_test_animation(
             scale: Vec3::one()
         },
         material: materials.add(texture_h.clone().into()),
-        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: true })),
+        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: false })),
         ..Default::default()
     })
     .with_bundle(AnimatedSpriteBundle{
@@ -75,7 +75,7 @@ fn create_test_animation(
             scale: Vec3::one()
         },
         material: materials.add(texture_h.clone().into()),
-        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: true })),
+        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: false })),
         ..Default::default()
     })
     .with_bundle(AnimatedSpriteBundle{
@@ -91,7 +91,7 @@ fn create_test_animation(
             scale: Vec3::one()
         },
         material: materials.add(texture_h.clone().into()),
-        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: true })),
+        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: false })),
         ..Default::default()
     })
     .with_bundle(AnimatedSpriteBundle{
@@ -107,7 +107,7 @@ fn create_test_animation(
             scale: Vec3::one()
         },
         material: materials.add(texture_h.clone().into()),
-        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: true })),
+        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: false })),
         ..Default::default()
     })
     .with_bundle(AnimatedSpriteBundle{
@@ -123,7 +123,7 @@ fn create_test_animation(
             scale: Vec3::one()
         },
         material: materials.add(texture_h.clone().into()),
-        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: true })),
+        mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: false })),
         ..Default::default()
     })
     .with_bundle(AnimatedSpriteBundle{
