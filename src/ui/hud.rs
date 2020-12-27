@@ -2,6 +2,8 @@ use bevy::{
     diagnostic::{Diagnostics, FrameTimeDiagnosticsPlugin},
     prelude::*,
 };
+
+use crate::game_entity::behaviour_components::*;
 use crate::game_entity::player::player_components::*;
 
 pub struct Hud;
@@ -18,16 +20,16 @@ impl Plugin for Hud {
 struct HealthCount;
 struct AmmoCount;
 
-// TODO: get player health
-fn health_update_system(mut query: Query<&mut Text, With<HealthCount>>) {
+fn health_update_system(players: Query<&Destructable, With<Player>>, mut query: Query<&mut Text, With<HealthCount>>) {
     for mut text in query.iter_mut() {
-        if let health = 100 {
+        for p in players.iter() {
+            let health = p.current_health;
             text.value = format!("Health: {:.0}", health);
         }
     }
 }
 
-// TODO: get player ammo
+// TODO: get weapon ammo
 fn ammo_update_system(mut query: Query<&mut Text, With<AmmoCount>>) {
     for mut text in query.iter_mut() {
         if let ammo = 30 {
