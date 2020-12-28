@@ -6,6 +6,7 @@ use input::input_adapter::*;
 
 mod game_entity;
 use game_entity::player::player_controller::*;
+use game_entity::weapons::weapons_plugin::*;
 
 mod graphics;
 use graphics::sprite_animator::*;
@@ -13,7 +14,6 @@ use graphics::test_sprite_animation::*;
 
 mod ui;
 use ui::hud::*;
-
 fn main() {
     App::build()
         .add_resource(Msaa {samples: 4})
@@ -29,6 +29,7 @@ fn main() {
         .add_plugin(InputAdapter)
         .add_plugin(PlayerController)
         .add_plugin(SpriteAnimationPlugin)
+        .add_plugin(WeaponsPlugin)
         .add_plugin(TestSpriteAnimator)
         .add_plugin(Hud)
         .add_startup_system(setup.system())
@@ -44,9 +45,9 @@ fn setup(
     commands
         // Plane
         .spawn(PbrBundle {
-            mesh: meshes.add(Mesh::from(shape::Plane { size: 10.0 })),
+            mesh: meshes.add(Mesh::from(shape::Box::new(20.0, 1.0, 20.0))),
             material: materials.add(Color::rgb(1.0, 0.0, 0.0).into()),
-            transform: Transform::from_translation(Vec3::new(0.0, 0.0, 0.0)),
+            transform: Transform::from_translation(Vec3::new(0.0, -0.5, 0.0)),
             ..Default::default()
         })
         // Light

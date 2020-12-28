@@ -17,9 +17,7 @@ impl Plugin for PlayerController {
     }
 }
 
-fn setup_player_character(
-    commands: &mut Commands
-) {
+fn setup_player_character(commands: &mut Commands) {
     let player = commands.spawn(PlayerBundle{
         player: Player{},
         transform: Transform{
@@ -104,9 +102,7 @@ fn update_first_person_camera(
     }
 }
 
-fn update_player_death(
-    players: Query<&Destructable, With<Player>>
-) {
+fn update_player_death(players: Query<&Destructable, With<Player>>) {
     for player in players.iter() {
         if player.current_health <= 0.0 {
             info!("You died! To do: restart or something");
