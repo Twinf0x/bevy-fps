@@ -81,7 +81,7 @@ fn setup_player_character(
             bullet_hit_range: 0.15,
             bullet_damage_on_hit: 50.0,
             bullet_speed: 25.0,
-            bullet_texture: asset_server.load("textures/letters/letter_H.png")
+            bullet_texture: asset_server.load("textures/bullet/bullet_air.png")
         }
     };
     weapon_bundle.weapon.reload_timer.pause();
@@ -190,10 +190,16 @@ fn update_weapons(
                 weapon.current_magazine -= 1;
                 weapon.current_ammo -= 1;
 
+                // TODO Maybe add a light to the bullets.. they're pretty invisible right now
+                // Buuut you can only have 10 Light Sources before Bevy crashes, so no
                 commands.spawn(PbrBundle{
                     transform: Transform::from_translation(transform.translation),
-                    mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::one(), flip: true })),
+                    mesh: meshes.add(Mesh::from(shape::Quad { size: Vec2::splat(0.2), flip: true })),
                     material: materials.add(weapon.bullet_texture.clone().into()),
+                    visible: Visible {
+                        is_transparent: true,
+                        ..Default::default()
+                    },
                     ..Default::default()
                 })
                 .with(BillboardSprite{})
