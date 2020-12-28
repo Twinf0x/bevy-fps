@@ -13,7 +13,6 @@ pub struct Bullet {
     pub velocity: Vec3,
     pub hit_range: f32,
     pub damage_on_hit: f32,
-    pub speed: f32,
 }
 
 pub struct Obstacle {

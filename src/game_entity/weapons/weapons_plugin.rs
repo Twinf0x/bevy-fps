@@ -12,7 +12,7 @@ impl Plugin for WeaponsPlugin {
 fn update_bullets(
     time: Res<Time>,
     commands: &mut Commands, 
-    mut bullets: Query<(Entity, &mut GlobalTransform, &Bullet)>,
+    mut bullets: Query<(Entity, &mut Transform, &Bullet)>,
     mut targets: Query<(&GlobalTransform, &mut Destructable), Without<Player>>,
     walls: Query<&Obstacle>
 ) {
